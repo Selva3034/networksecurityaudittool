@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Security Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .results div {
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>URL Security Check</h1>
+    <div class="form-group">
+        <label for="url">Enter URL:</label>
+        <input type="text" id="url" name="url" placeholder="https://example.com">
+    </div>
+    <button onclick="checkSecurity()" id="checkButton">Check Security</button>
+
+    <div class="results" id="results">
+        <!-- Results will be displayed here -->
+    </div>
+</div>
+
+<script>
+    function checkSecurity() {
+        var url = document.getElementById('url').value;
+        if (url === "") {
+            alert("Please enter a URL.");
+            return;
+        }
+
+        document.getElementById('checkButton').disabled = true;
+
+        // Clear previous results
+        var results = document.getElementById('results');
+        results.innerHTML = "";
+
+        // Simulate API calls to backend services for each tool
+        checkWithTool("OpenVAS", url);
+        checkWithTool("Nessus", url);
+        checkWithTool("Qualys", url);
+    }
+
+    function checkWithTool(toolName, url) {
+        // Simulate a call to the backend service (you would replace this with actual API calls)
+        setTimeout(function() {
+            var resultDiv = document.createElement('div');
+            resultDiv.innerHTML = `<strong>${toolName}:</strong> Scanned ${url} - No vulnerabilities found.`;
+            document.getElementById('results').appendChild(resultDiv);
+            document.getElementById('checkButton').disabled = false;
+        }, Math.random() * 2000 + 1000);
+    }
+</script>
+
+</body>
+</html>
